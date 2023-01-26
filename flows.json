@@ -1,0 +1,1999 @@
+[
+    {
+        "id": "1a658512f8a93a4b",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "9c10389e413732a6",
+        "type": "ui_gauge",
+        "z": "1a658512f8a93a4b",
+        "name": "",
+        "group": "2170bb4933797440",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Voltage",
+        "label": "V",
+        "format": "{{value}}",
+        "min": "10",
+        "max": "15",
+        "colors": [
+            "#ca3838",
+            "#e6e600",
+            "#00b500"
+        ],
+        "seg1": "11.9",
+        "seg2": "12.3",
+        "diff": false,
+        "className": "",
+        "x": 760,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "d0e23365e2f74d77",
+        "type": "function",
+        "z": "1a658512f8a93a4b",
+        "name": "2 decimals",
+        "func": "msg.payload = +(msg.payload.toFixed(2));\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 660,
+        "wires": [
+            [
+                "13d2d44b5489b750"
+            ]
+        ]
+    },
+    {
+        "id": "13d2d44b5489b750",
+        "type": "rbe",
+        "z": "1a658512f8a93a4b",
+        "name": "Changed?",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 590,
+        "y": 660,
+        "wires": [
+            [
+                "9c10389e413732a6",
+                "13b4a9e8301f088d"
+            ]
+        ]
+    },
+    {
+        "id": "352cef674a215cca",
+        "type": "function",
+        "z": "1a658512f8a93a4b",
+        "name": "2 decimals",
+        "func": "msg.payload = +(msg.payload.toFixed(2));\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 480,
+        "wires": [
+            [
+                "a91b943e8835b2b6"
+            ]
+        ]
+    },
+    {
+        "id": "a91b943e8835b2b6",
+        "type": "rbe",
+        "z": "1a658512f8a93a4b",
+        "name": "Changed?",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 650,
+        "y": 480,
+        "wires": [
+            [
+                "07aef3b0c5ec5966",
+                "2691140e9f8d6428"
+            ]
+        ]
+    },
+    {
+        "id": "07aef3b0c5ec5966",
+        "type": "ui_gauge",
+        "z": "1a658512f8a93a4b",
+        "name": "",
+        "group": "2170bb4933797440",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "donut",
+        "title": "State of charge",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#ca3838",
+            "#e6e600",
+            "#00b500"
+        ],
+        "seg1": "50",
+        "seg2": "65",
+        "diff": false,
+        "className": "",
+        "x": 840,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "76c68b8b3bdacb5f",
+        "type": "victron-input-relay",
+        "z": "1a658512f8a93a4b",
+        "service": "com.victronenergy.system/0",
+        "path": "/Relay/0/State",
+        "serviceObj": {
+            "service": "com.victronenergy.system/0",
+            "name": "Venus system"
+        },
+        "pathObj": {
+            "path": "/Relay/0/State",
+            "type": "enum",
+            "name": "Venus relay 1 state",
+            "enum": {
+                "0": "Open",
+                "1": "Closed"
+            }
+        },
+        "initial": "",
+        "name": "",
+        "x": 160,
+        "y": 240,
+        "wires": [
+            [
+                "fad9c1708ae4a825"
+            ]
+        ]
+    },
+    {
+        "id": "3a72e2b36be13690",
+        "type": "ui_text",
+        "z": "1a658512f8a93a4b",
+        "group": "5a41aa9c4eace669",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "Relay status",
+        "label": "Status",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 790,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "61fe149ddf0e2fd4",
+        "type": "function",
+        "z": "1a658512f8a93a4b",
+        "name": "0 = off, 1 = on",
+        "func": "msg.payload = (msg.payload === 1) ? 'On' : 'Off';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 240,
+        "wires": [
+            [
+                "3a72e2b36be13690"
+            ]
+        ]
+    },
+    {
+        "id": "5081d39cf19cd8e4",
+        "type": "ui_button",
+        "z": "1a658512f8a93a4b",
+        "name": "",
+        "group": "5a41aa9c4eace669",
+        "order": 3,
+        "width": "3",
+        "height": "1",
+        "passthru": false,
+        "label": "+30 mins",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "#A6BBCF",
+        "className": "",
+        "icon": "timer",
+        "payload": "30",
+        "payloadType": "num",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 80,
+        "y": 820,
+        "wires": [
+            [
+                "e8e5acfd193e9607"
+            ]
+        ]
+    },
+    {
+        "id": "e8e5acfd193e9607",
+        "type": "change",
+        "z": "1a658512f8a93a4b",
+        "name": "Add time",
+        "rules": [
+            {
+                "t": "set",
+                "p": "add",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "heatingTimer",
+                "tot": "flow"
+            },
+            {
+                "t": "set",
+                "p": "heatingTimer",
+                "pt": "flow",
+                "to": "msg.payload+msg.add",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "heatingTimer",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1160,
+        "y": 820,
+        "wires": [
+            [
+                "8814f955f65a6adb"
+            ]
+        ]
+    },
+    {
+        "id": "c03846fd096ce96b",
+        "type": "inject",
+        "z": "1a658512f8a93a4b",
+        "name": "Startup",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "timestamp",
+                "v": "",
+                "vt": "date"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 80,
+        "y": 780,
+        "wires": [
+            [
+                "1a21d2de8dff2bc7",
+                "4756ea4e0e76bb3e"
+            ]
+        ]
+    },
+    {
+        "id": "1a21d2de8dff2bc7",
+        "type": "change",
+        "z": "1a658512f8a93a4b",
+        "name": "Set time",
+        "rules": [
+            {
+                "t": "set",
+                "p": "heatingTimer",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1160,
+        "y": 780,
+        "wires": [
+            [
+                "8814f955f65a6adb"
+            ]
+        ]
+    },
+    {
+        "id": "8814f955f65a6adb",
+        "type": "ui_text",
+        "z": "1a658512f8a93a4b",
+        "group": "5a41aa9c4eace669",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "Timer input",
+        "label": "Set timer to",
+        "format": "{{msg.payload}} minutes",
+        "layout": "row-spread",
+        "className": "",
+        "x": 1430,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "0722284d084c27c0",
+        "type": "ui_button",
+        "z": "1a658512f8a93a4b",
+        "name": "",
+        "group": "5a41aa9c4eace669",
+        "order": 4,
+        "width": "3",
+        "height": "1",
+        "passthru": false,
+        "label": "Reset",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "#A6BBCF",
+        "className": "",
+        "icon": "close",
+        "payload": "0",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 70,
+        "y": 860,
+        "wires": [
+            [
+                "535ba18a3fecdf06"
+            ]
+        ]
+    },
+    {
+        "id": "535ba18a3fecdf06",
+        "type": "change",
+        "z": "1a658512f8a93a4b",
+        "name": "Reset time",
+        "rules": [
+            {
+                "t": "set",
+                "p": "heatingTimer",
+                "pt": "flow",
+                "to": "0",
+                "tot": "num"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "heatingTimer",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1150,
+        "y": 860,
+        "wires": [
+            [
+                "8814f955f65a6adb"
+            ]
+        ]
+    },
+    {
+        "id": "cde12e2a53f2a048",
+        "type": "ui_button",
+        "z": "1a658512f8a93a4b",
+        "name": "",
+        "group": "5a41aa9c4eace669",
+        "order": 5,
+        "width": "3",
+        "height": "1",
+        "passthru": false,
+        "label": "Start",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "#87A980",
+        "className": "",
+        "icon": "whatshot",
+        "payload": "Start heating?",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 70,
+        "y": 920,
+        "wires": [
+            [
+                "28ce88c3ddb66cf5"
+            ]
+        ]
+    },
+    {
+        "id": "6737c77235bb6f03",
+        "type": "stoptimer-varidelay",
+        "z": "1a658512f8a93a4b",
+        "duration": "60",
+        "durationType": "num",
+        "units": "Minute",
+        "payloadtype": "str",
+        "payloadval": "",
+        "name": "Heating timer",
+        "reporting": "every_second",
+        "persist": true,
+        "ignoretimerpass": false,
+        "x": 1370,
+        "y": 1120,
+        "wires": [
+            [
+                "af6b7a98a0926c57"
+            ],
+            [],
+            [
+                "7952921bb27053b9"
+            ]
+        ]
+    },
+    {
+        "id": "90b7332a198cb97f",
+        "type": "change",
+        "z": "1a658512f8a93a4b",
+        "name": "Set timer",
+        "rules": [
+            {
+                "t": "set",
+                "p": "delay",
+                "pt": "msg",
+                "to": "heatingTimer",
+                "tot": "flow"
+            },
+            {
+                "t": "set",
+                "p": "units",
+                "pt": "msg",
+                "to": "Minutes",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "heatingTimer",
+                "pt": "flow",
+                "to": "0",
+                "tot": "num"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "heatingTimer",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1160,
+        "y": 960,
+        "wires": [
+            [
+                "6737c77235bb6f03",
+                "8814f955f65a6adb"
+            ]
+        ]
+    },
+    {
+        "id": "7952921bb27053b9",
+        "type": "ui_text",
+        "z": "1a658512f8a93a4b",
+        "group": "5a41aa9c4eace669",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Time remaining",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 1660,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "6668804d13c8e812",
+        "type": "ui_button",
+        "z": "1a658512f8a93a4b",
+        "name": "",
+        "group": "5a41aa9c4eace669",
+        "order": 6,
+        "width": "3",
+        "height": "1",
+        "passthru": false,
+        "label": "Stop",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "#E9967A",
+        "className": "",
+        "icon": "stop",
+        "payload": "Stop heating?",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 70,
+        "y": 1120,
+        "wires": [
+            [
+                "58e3ce4ee186ae2c"
+            ]
+        ]
+    },
+    {
+        "id": "4756ea4e0e76bb3e",
+        "type": "change",
+        "z": "1a658512f8a93a4b",
+        "name": "Set display",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "stopped",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 250,
+        "y": 740,
+        "wires": [
+            [
+                "7952921bb27053b9"
+            ]
+        ]
+    },
+    {
+        "id": "b158c161f45ee36a",
+        "type": "switch",
+        "z": "1a658512f8a93a4b",
+        "name": "Time 0?",
+        "property": "heatingTimer",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 940,
+        "y": 940,
+        "wires": [
+            [
+                "063a5fda30a39fc4"
+            ],
+            [
+                "90b7332a198cb97f"
+            ]
+        ]
+    },
+    {
+        "id": "063a5fda30a39fc4",
+        "type": "change",
+        "z": "1a658512f8a93a4b",
+        "name": "Set to 60 mins",
+        "rules": [
+            {
+                "t": "set",
+                "p": "heatingTimer",
+                "pt": "flow",
+                "to": "60",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1140,
+        "y": 900,
+        "wires": [
+            [
+                "90b7332a198cb97f"
+            ]
+        ]
+    },
+    {
+        "id": "af6b7a98a0926c57",
+        "type": "change",
+        "z": "1a658512f8a93a4b",
+        "name": "Stop heating",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "stop",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1370,
+        "y": 1060,
+        "wires": [
+            [
+                "04a62190fe15647e"
+            ]
+        ]
+    },
+    {
+        "id": "47723f44a1da73bd",
+        "type": "link out",
+        "z": "1a658512f8a93a4b",
+        "name": "Start heating",
+        "mode": "link",
+        "links": [
+            "93150a80b31f59fa"
+        ],
+        "x": 895,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "93150a80b31f59fa",
+        "type": "link in",
+        "z": "1a658512f8a93a4b",
+        "name": "Heating relay",
+        "links": [
+            "04a62190fe15647e",
+            "47723f44a1da73bd",
+            "579315d457e7292e",
+            "76389bfc927d35dd"
+        ],
+        "x": 35,
+        "y": 1220,
+        "wires": [
+            [
+                "b82384f45687a3f7"
+            ]
+        ]
+    },
+    {
+        "id": "04a62190fe15647e",
+        "type": "link out",
+        "z": "1a658512f8a93a4b",
+        "name": "Stop heating (timer)",
+        "mode": "link",
+        "links": [
+            "93150a80b31f59fa"
+        ],
+        "x": 1315,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "76389bfc927d35dd",
+        "type": "link out",
+        "z": "1a658512f8a93a4b",
+        "name": "Stop heating (manual)",
+        "mode": "link",
+        "links": [
+            "93150a80b31f59fa"
+        ],
+        "x": 495,
+        "y": 1160,
+        "wires": []
+    },
+    {
+        "id": "13b4a9e8301f088d",
+        "type": "change",
+        "z": "1a658512f8a93a4b",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "batteryVoltage",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 800,
+        "y": 620,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e0b6eb66a4f7a81a",
+        "type": "switch",
+        "z": "1a658512f8a93a4b",
+        "name": "Volts OK?",
+        "property": "batteryVoltage",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "12.9",
+                "vt": "num"
+            },
+            {
+                "t": "btwn",
+                "v": "12.1",
+                "vt": "num",
+                "v2": "12.9",
+                "v2t": "num"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 540,
+        "y": 920,
+        "wires": [
+            [
+                "47723f44a1da73bd",
+                "b158c161f45ee36a"
+            ],
+            [
+                "8340743349548bcb"
+            ],
+            [
+                "c4cbd8e8addb01b2"
+            ]
+        ]
+    },
+    {
+        "id": "c4cbd8e8addb01b2",
+        "type": "change",
+        "z": "1a658512f8a93a4b",
+        "name": "Volts low",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Voltage too low!",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 700,
+        "y": 1080,
+        "wires": [
+            [
+                "7b8feb6c873e0eb1"
+            ]
+        ]
+    },
+    {
+        "id": "8340743349548bcb",
+        "type": "switch",
+        "z": "1a658512f8a93a4b",
+        "name": "% OK?",
+        "property": "batteryPercent",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "gte",
+                "v": "55",
+                "vt": "num"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 740,
+        "y": 980,
+        "wires": [
+            [
+                "b158c161f45ee36a",
+                "47723f44a1da73bd"
+            ],
+            [
+                "0abf11dc86644d21"
+            ]
+        ]
+    },
+    {
+        "id": "0abf11dc86644d21",
+        "type": "change",
+        "z": "1a658512f8a93a4b",
+        "name": "% low",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Battery % too low!",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 710,
+        "y": 1040,
+        "wires": [
+            [
+                "7b8feb6c873e0eb1"
+            ]
+        ]
+    },
+    {
+        "id": "2691140e9f8d6428",
+        "type": "change",
+        "z": "1a658512f8a93a4b",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "batteryPercent",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 860,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "02653a9d3536e345",
+        "type": "victron-output-relay",
+        "z": "1a658512f8a93a4b",
+        "service": "com.victronenergy.system/0",
+        "path": "/Relay/0/State",
+        "serviceObj": {
+            "service": "com.victronenergy.system/0",
+            "name": "Venus device"
+        },
+        "pathObj": {
+            "path": "/Relay/0/State",
+            "type": "enum",
+            "name": "Venus relay 1 state",
+            "enum": {
+                "0": "Open",
+                "1": "Closed"
+            },
+            "writable": true
+        },
+        "initial": "",
+        "name": "",
+        "x": 440,
+        "y": 1220,
+        "wires": []
+    },
+    {
+        "id": "7b8feb6c873e0eb1",
+        "type": "ui_toast",
+        "z": "1a658512f8a93a4b",
+        "position": "top right",
+        "displayTime": "5",
+        "highlight": "#FFCC66",
+        "sendall": false,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "",
+        "name": "Low battery notification",
+        "x": 900,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "4f8edf030563e683",
+        "type": "switch",
+        "z": "1a658512f8a93a4b",
+        "name": "Voltage critical?",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "lte",
+                "v": "11.85",
+                "vt": "num"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 640,
+        "y": 540,
+        "wires": [
+            [
+                "86a96f4e9f576232"
+            ],
+            [
+                "82fd653c3f675bc8"
+            ]
+        ]
+    },
+    {
+        "id": "86a96f4e9f576232",
+        "type": "trigger",
+        "z": "1a658512f8a93a4b",
+        "name": "Critical for 3min?",
+        "op1": "",
+        "op2": "Battery critical, heating stopped",
+        "op1type": "nul",
+        "op2type": "str",
+        "duration": "3",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "min",
+        "reset": "reset",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 1030,
+        "y": 540,
+        "wires": [
+            [
+                "6c8aae0ee6730fb6"
+            ]
+        ]
+    },
+    {
+        "id": "82fd653c3f675bc8",
+        "type": "change",
+        "z": "1a658512f8a93a4b",
+        "name": "Reset timer",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "reset",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 830,
+        "y": 580,
+        "wires": [
+            [
+                "86a96f4e9f576232"
+            ]
+        ]
+    },
+    {
+        "id": "5f1e8bad4a2560c7",
+        "type": "ui_toast",
+        "z": "1a658512f8a93a4b",
+        "position": "top right",
+        "displayTime": "5",
+        "highlight": "#FFAAAA",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "",
+        "name": "Critical battery notification",
+        "x": 1310,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "fad9c1708ae4a825",
+        "type": "rbe",
+        "z": "1a658512f8a93a4b",
+        "name": "Changed?",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 410,
+        "y": 240,
+        "wires": [
+            [
+                "61fe149ddf0e2fd4",
+                "35fbbe12d9cd0537"
+            ]
+        ]
+    },
+    {
+        "id": "35fbbe12d9cd0537",
+        "type": "change",
+        "z": "1a658512f8a93a4b",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "heatingRunning",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 630,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f378f003a0a1e411",
+        "type": "switch",
+        "z": "1a658512f8a93a4b",
+        "name": "Heating running?",
+        "property": "heatingRunning",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 430,
+        "y": 560,
+        "wires": [
+            [
+                "4f8edf030563e683"
+            ],
+            [
+                "82fd653c3f675bc8"
+            ]
+        ]
+    },
+    {
+        "id": "6c8aae0ee6730fb6",
+        "type": "change",
+        "z": "1a658512f8a93a4b",
+        "name": "Clear topic",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1090,
+        "y": 600,
+        "wires": [
+            [
+                "5f1e8bad4a2560c7",
+                "b008b1c203243621",
+                "5982b0acbe46e196"
+            ]
+        ]
+    },
+    {
+        "id": "579315d457e7292e",
+        "type": "link out",
+        "z": "1a658512f8a93a4b",
+        "name": "Stop heating (battery)",
+        "mode": "link",
+        "links": [
+            "93150a80b31f59fa",
+            "f14ddb662c167c08"
+        ],
+        "x": 1395,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "f14ddb662c167c08",
+        "type": "link in",
+        "z": "1a658512f8a93a4b",
+        "name": "Cancel timer",
+        "links": [
+            "579315d457e7292e"
+        ],
+        "x": 1245,
+        "y": 1160,
+        "wires": [
+            [
+                "6737c77235bb6f03"
+            ]
+        ]
+    },
+    {
+        "id": "b82384f45687a3f7",
+        "type": "function",
+        "z": "1a658512f8a93a4b",
+        "name": "start = 1, stop = 0",
+        "func": "msg.payload = (msg.payload === 'start') ? 1 : 0;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 170,
+        "y": 1220,
+        "wires": [
+            [
+                "02653a9d3536e345"
+            ]
+        ]
+    },
+    {
+        "id": "3d8756fd4a0e7966",
+        "type": "change",
+        "z": "1a658512f8a93a4b",
+        "name": "Set display",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "stopped (battery)",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1350,
+        "y": 700,
+        "wires": [
+            [
+                "7952921bb27053b9"
+            ]
+        ]
+    },
+    {
+        "id": "b008b1c203243621",
+        "type": "delay",
+        "z": "1a658512f8a93a4b",
+        "name": "Await display change",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1300,
+        "y": 640,
+        "wires": [
+            [
+                "3d8756fd4a0e7966"
+            ]
+        ]
+    },
+    {
+        "id": "28ce88c3ddb66cf5",
+        "type": "ui_toast",
+        "z": "1a658512f8a93a4b",
+        "position": "dialog",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": false,
+        "outputs": 1,
+        "ok": "start",
+        "cancel": "cancel",
+        "raw": false,
+        "className": "confirm-dialog",
+        "topic": "",
+        "name": "Confirm",
+        "x": 200,
+        "y": 920,
+        "wires": [
+            [
+                "2a3467d83291810f"
+            ]
+        ]
+    },
+    {
+        "id": "58e3ce4ee186ae2c",
+        "type": "ui_toast",
+        "z": "1a658512f8a93a4b",
+        "position": "dialog",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": false,
+        "outputs": 1,
+        "ok": "stop",
+        "cancel": "cancel",
+        "raw": false,
+        "className": "confirm-dialog",
+        "topic": "",
+        "name": "Confirm",
+        "x": 200,
+        "y": 1120,
+        "wires": [
+            [
+                "03ee4fe802d4ce18"
+            ]
+        ]
+    },
+    {
+        "id": "5982b0acbe46e196",
+        "type": "change",
+        "z": "1a658512f8a93a4b",
+        "name": "Stop heating",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "stop",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1270,
+        "y": 560,
+        "wires": [
+            [
+                "579315d457e7292e"
+            ]
+        ]
+    },
+    {
+        "id": "2a3467d83291810f",
+        "type": "switch",
+        "z": "1a658512f8a93a4b",
+        "name": "Confirmed?",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "start",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 370,
+        "y": 920,
+        "wires": [
+            [
+                "e0b6eb66a4f7a81a"
+            ]
+        ]
+    },
+    {
+        "id": "03ee4fe802d4ce18",
+        "type": "switch",
+        "z": "1a658512f8a93a4b",
+        "name": "Confirmed?",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "stop",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 370,
+        "y": 1120,
+        "wires": [
+            [
+                "6737c77235bb6f03",
+                "76389bfc927d35dd"
+            ]
+        ]
+    },
+    {
+        "id": "4aea8dc817937a15",
+        "type": "ui_template",
+        "z": "1a658512f8a93a4b",
+        "group": "5a41aa9c4eace669",
+        "name": "Dashboard CSS",
+        "order": 9,
+        "width": 0,
+        "height": 0,
+        "format": "<style>\n    .confirm-dialog .md-title {\n        display: none;\n    }\n    .confirm-dialog .md-dialog-content-body {\n        padding: 1em;\n    }\n</style>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "global",
+        "className": "",
+        "x": 100,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a3c5be16ad975328",
+        "type": "victron-input-system",
+        "z": "1a658512f8a93a4b",
+        "service": "com.victronenergy.system/0",
+        "path": "/Dc/Battery/Current",
+        "serviceObj": {
+            "service": "com.victronenergy.system/0",
+            "name": "Venus system"
+        },
+        "pathObj": {
+            "path": "/Dc/Battery/Current",
+            "type": "float",
+            "name": "Battery current (A)"
+        },
+        "name": "",
+        "x": 160,
+        "y": 300,
+        "wires": [
+            [
+                "c9b64a0a52ee6299"
+            ]
+        ]
+    },
+    {
+        "id": "e8d086910b27b6c0",
+        "type": "victron-input-system",
+        "z": "1a658512f8a93a4b",
+        "service": "com.victronenergy.system/0",
+        "path": "/Dc/Battery/Voltage",
+        "serviceObj": {
+            "service": "com.victronenergy.system/0",
+            "name": "Venus system"
+        },
+        "pathObj": {
+            "path": "/Dc/Battery/Voltage",
+            "type": "float",
+            "name": "Battery voltage (V)"
+        },
+        "name": "",
+        "x": 160,
+        "y": 660,
+        "wires": [
+            [
+                "f378f003a0a1e411",
+                "d0e23365e2f74d77"
+            ]
+        ]
+    },
+    {
+        "id": "f4bf67daba7ebd63",
+        "type": "victron-input-system",
+        "z": "1a658512f8a93a4b",
+        "service": "com.victronenergy.system/0",
+        "path": "/Dc/Battery/Soc",
+        "serviceObj": {
+            "service": "com.victronenergy.system/0",
+            "name": "Venus system"
+        },
+        "pathObj": {
+            "path": "/Dc/Battery/Soc",
+            "type": "float",
+            "name": "Battery State of Charge (%)"
+        },
+        "name": "",
+        "x": 190,
+        "y": 480,
+        "wires": [
+            [
+                "352cef674a215cca"
+            ]
+        ]
+    },
+    {
+        "id": "c9b64a0a52ee6299",
+        "type": "rbe",
+        "z": "1a658512f8a93a4b",
+        "name": "Changed?",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 410,
+        "y": 300,
+        "wires": [
+            [
+                "a935fac7c788e2a9"
+            ]
+        ]
+    },
+    {
+        "id": "a935fac7c788e2a9",
+        "type": "ui_artlessgauge",
+        "z": "1a658512f8a93a4b",
+        "group": "2170bb4933797440",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "Battery current",
+        "icon": "",
+        "label": "Battery current",
+        "unit": "A",
+        "layout": "linear",
+        "decimals": "2",
+        "differential": true,
+        "minmax": false,
+        "colorTrack": "#555555",
+        "style": "",
+        "colorFromTheme": true,
+        "property": "payload",
+        "secondary": "secondary",
+        "inline": false,
+        "animate": true,
+        "sectors": [
+            {
+                "val": -50,
+                "col": "#ca3838",
+                "t": "min",
+                "dot": 0
+            },
+            {
+                "val": 0,
+                "col": "#00b500",
+                "t": "sec",
+                "dot": 0
+            },
+            {
+                "val": 50,
+                "col": "#00b500",
+                "t": "max",
+                "dot": 0
+            }
+        ],
+        "lineWidth": "7",
+        "bgcolorFromTheme": true,
+        "diffCenter": "0",
+        "x": 600,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "9b26f68a08bd9f36",
+        "type": "victron-input-system",
+        "z": "1a658512f8a93a4b",
+        "service": "com.victronenergy.system/0",
+        "path": "/Dc/Battery/Temperature",
+        "serviceObj": {
+            "service": "com.victronenergy.system/0",
+            "name": "Venus system"
+        },
+        "pathObj": {
+            "path": "/Dc/Battery/Temperature",
+            "type": "float",
+            "name": "Battery temperature (C)"
+        },
+        "name": "",
+        "x": 170,
+        "y": 360,
+        "wires": [
+            [
+                "e8836b66e358ad89"
+            ]
+        ]
+    },
+    {
+        "id": "e8836b66e358ad89",
+        "type": "rbe",
+        "z": "1a658512f8a93a4b",
+        "name": "Changed?",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 430,
+        "y": 360,
+        "wires": [
+            [
+                "34f3f4aded34a0d6"
+            ]
+        ]
+    },
+    {
+        "id": "34f3f4aded34a0d6",
+        "type": "ui_artlessgauge",
+        "z": "1a658512f8a93a4b",
+        "group": "2170bb4933797440",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "name": "Battery temperature",
+        "icon": "",
+        "label": "Battery temperature",
+        "unit": "°C",
+        "layout": "linear",
+        "decimals": "0",
+        "differential": false,
+        "minmax": false,
+        "colorTrack": "#555555",
+        "style": "",
+        "colorFromTheme": true,
+        "property": "payload",
+        "secondary": "secondary",
+        "inline": false,
+        "animate": true,
+        "sectors": [
+            {
+                "val": -10,
+                "col": "#ca3838",
+                "t": "min",
+                "dot": 0
+            },
+            {
+                "val": 0,
+                "col": "#e6e600",
+                "t": "sec",
+                "dot": 0
+            },
+            {
+                "val": 3,
+                "col": "#00b500",
+                "t": "sec",
+                "dot": 0
+            },
+            {
+                "val": 30,
+                "col": "#e6e600",
+                "t": "sec",
+                "dot": 0
+            },
+            {
+                "val": 40,
+                "col": "#ca3838",
+                "t": "sec",
+                "dot": 0
+            },
+            {
+                "val": 50,
+                "col": "#ca3838",
+                "t": "max",
+                "dot": 0
+            }
+        ],
+        "lineWidth": "7",
+        "bgcolorFromTheme": true,
+        "diffCenter": "0",
+        "x": 640,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "dae63c587d877f67",
+        "type": "victron-input-temperature",
+        "z": "1a658512f8a93a4b",
+        "service": "com.victronenergy.temperature/101",
+        "path": "/Temperature",
+        "serviceObj": {
+            "service": "com.victronenergy.temperature/101",
+            "name": "Bedroom"
+        },
+        "pathObj": {
+            "path": "/Temperature",
+            "type": "float",
+            "name": "Temperature (C)"
+        },
+        "name": "",
+        "x": 130,
+        "y": 420,
+        "wires": [
+            [
+                "b76c1bd80430d041"
+            ]
+        ]
+    },
+    {
+        "id": "b76c1bd80430d041",
+        "type": "rbe",
+        "z": "1a658512f8a93a4b",
+        "name": "Changed?",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 350,
+        "y": 420,
+        "wires": [
+            [
+                "844983934bd374f6"
+            ]
+        ]
+    },
+    {
+        "id": "844983934bd374f6",
+        "type": "ui_artlessgauge",
+        "z": "1a658512f8a93a4b",
+        "group": "5a41aa9c4eace669",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "name": "Bedroom temperature",
+        "icon": "",
+        "label": "Bedroom temperature",
+        "unit": "°C",
+        "layout": "linear",
+        "decimals": "1",
+        "differential": false,
+        "minmax": false,
+        "colorTrack": "#555555",
+        "style": "",
+        "colorFromTheme": true,
+        "property": "payload",
+        "secondary": "secondary",
+        "inline": false,
+        "animate": true,
+        "sectors": [
+            {
+                "val": -10,
+                "col": "#ca3838",
+                "t": "min",
+                "dot": 0
+            },
+            {
+                "val": 5,
+                "col": "#e6e600",
+                "t": "sec",
+                "dot": 0
+            },
+            {
+                "val": 15,
+                "col": "#00b500",
+                "t": "sec",
+                "dot": 0
+            },
+            {
+                "val": 23,
+                "col": "#e6e600",
+                "t": "sec",
+                "dot": 0
+            },
+            {
+                "val": 30,
+                "col": "#ca3838",
+                "t": "sec",
+                "dot": 0
+            },
+            {
+                "val": 40,
+                "col": "#ca3838",
+                "t": "max",
+                "dot": 0
+            }
+        ],
+        "lineWidth": "7",
+        "bgcolorFromTheme": true,
+        "diffCenter": "0",
+        "x": 560,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "a6cb5f050c81b7c6",
+        "type": "victron-input-system",
+        "z": "1a658512f8a93a4b",
+        "service": "com.victronenergy.system/0",
+        "path": "/Dc/Pv/Power",
+        "serviceObj": {
+            "service": "com.victronenergy.system/0",
+            "name": "Venus system"
+        },
+        "pathObj": {
+            "path": "/Dc/Pv/Power",
+            "type": "float",
+            "name": "MPPTs - power (W)"
+        },
+        "name": "",
+        "x": 160,
+        "y": 80,
+        "wires": [
+            [
+                "0eda5d63cc149d2f"
+            ]
+        ]
+    },
+    {
+        "id": "0eda5d63cc149d2f",
+        "type": "rbe",
+        "z": "1a658512f8a93a4b",
+        "name": "Changed?",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 410,
+        "y": 80,
+        "wires": [
+            [
+                "15324e7e9153d0d6"
+            ]
+        ]
+    },
+    {
+        "id": "15324e7e9153d0d6",
+        "type": "ui_artlessgauge",
+        "z": "1a658512f8a93a4b",
+        "group": "2170bb4933797440",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "Solar power",
+        "icon": "",
+        "label": "Solar power",
+        "unit": "W",
+        "layout": "linear",
+        "decimals": "0",
+        "differential": false,
+        "minmax": false,
+        "colorTrack": "#555555",
+        "style": "",
+        "colorFromTheme": true,
+        "property": "payload",
+        "secondary": "secondary",
+        "inline": false,
+        "animate": true,
+        "sectors": [
+            {
+                "val": 0,
+                "col": "#00b500",
+                "t": "min",
+                "dot": 0
+            },
+            {
+                "val": 830,
+                "col": "#00b500",
+                "t": "max",
+                "dot": 0
+            }
+        ],
+        "lineWidth": "7",
+        "bgcolorFromTheme": true,
+        "diffCenter": "0",
+        "x": 590,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "5e58fcdc64085b8d",
+        "type": "victron-input-vebus",
+        "z": "1a658512f8a93a4b",
+        "service": "com.victronenergy.vebus/288",
+        "path": "/State",
+        "serviceObj": {
+            "service": "com.victronenergy.vebus/288",
+            "name": "MultiPlus 12/1600/70-16"
+        },
+        "pathObj": {
+            "path": "/State",
+            "type": "enum",
+            "name": "VE.Bus state",
+            "enum": {
+                "0": "Off",
+                "1": "Low Power",
+                "2": "Fault",
+                "3": "Bulk",
+                "4": "Absorption",
+                "5": "Float",
+                "6": "Storage",
+                "7": "Equalize",
+                "8": "Passthru",
+                "9": "Inverting",
+                "10": "Power assist",
+                "11": "Power supply",
+                "252": "Bulk protect"
+            }
+        },
+        "initial": "",
+        "name": "",
+        "x": 170,
+        "y": 140,
+        "wires": [
+            [
+                "d5dece5c8f60cada"
+            ]
+        ]
+    },
+    {
+        "id": "d5dece5c8f60cada",
+        "type": "rbe",
+        "z": "1a658512f8a93a4b",
+        "name": "Changed?",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 430,
+        "y": 140,
+        "wires": [
+            [
+                "a1e93449d8592c41"
+            ]
+        ]
+    },
+    {
+        "id": "a1e93449d8592c41",
+        "type": "function",
+        "z": "1a658512f8a93a4b",
+        "name": "Status to text",
+        "func": "let status = {\n    0: \"Off\",\n    1: \"Power saving\",\n    2: \"Fault\",\n    3: \"Bulk\",\n    4: \"Absorption\",\n    5: \"Float\",\n    6: \"Storage\",\n    7: \"Equalise\",\n    8: \"Passthrough\",\n    9: \"On\",\n    10: \"Power assist\",\n    11: \"Power supply\",\n    252: \"Bulk protect\"\n};\nmsg.payload = status[msg.payload] ? status[msg.payload] : \"Unknown\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 140,
+        "wires": [
+            [
+                "3a99ef87446b63d7"
+            ]
+        ]
+    },
+    {
+        "id": "3a99ef87446b63d7",
+        "type": "ui_text",
+        "z": "1a658512f8a93a4b",
+        "group": "2170bb4933797440",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "name": "Inverter status",
+        "label": "Inverter",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 800,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "2170bb4933797440",
+        "type": "ui_group",
+        "name": "Battery",
+        "tab": "53507447dda5a712",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "5a41aa9c4eace669",
+        "type": "ui_group",
+        "name": "Heating",
+        "tab": "53507447dda5a712",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "53507447dda5a712",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
