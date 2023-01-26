@@ -40,7 +40,7 @@ Solder a 4.7K resistor between the positive (red) and signal (yellow) wires of t
 
 ![Node-RED flows](docs/flows.png)
 
-Go to Node-RED (https://venus.lan:1881 or https://venus_ip:1881) and import the flow from flow.json. Edit any of the Victron devices as necessary for your system, then deploy.
+Go to Node-RED (https://venus.lan:1881 or https://venus_ip:1881) and import the flow from flows.json in this repo. Edit any of the Victron devices as necessary for your system, then deploy.
 
 By default, the heating can't be turned on if the battery voltage or charge percentage is low. If the battery voltage reaches (and stays at) a critical level while running, the heater will turn off automatically. You can adjust the thresholds by editing the nodes "Voltage critical?", "Critical for 3min?", "Volts OK?" and "% OK?".
 
