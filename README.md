@@ -26,7 +26,7 @@ I picked up a 5V 1-channel relay module for a couple of pounds on eBay. Connect 
 
 Now connect the NC and COM pins to your heating timer. The Webasto timer (Heatmiser TM1) turns on the heater by connecting pins A1 and A2 together, supplying 12V to the black wire on the loom. So, run a wire from each of NC and COM to A1 and A2 (either way round is fine) - see the yellow ferrules in the photo below.
 
-![Timer connection](docs/timer/jpg)
+![Timer connection](docs/timer.jpg)
 
 If you're using a GX device instead of a Pi, you don't need a separate relay module. Just connect the NC and COM pins of relay 1 as above.
 
